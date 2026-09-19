@@ -18,7 +18,9 @@ The paper's model runs live in the browser, split the same way its code is:
 - `tools/export_reference.py` — reads the reproducibility package (`../ACC_2027`)
   and exports identified parameters and step-by-step reference rollouts.
 - `test/` — parity tests against those rollouts; `test/fixtures/` is generated.
-- `site/` — the static site (pinned `@cognipilot/rumoca` in `site/vendor/npm/`).
+- `site/` — the static site. `@cognipilot/rumoca` 0.10.0 is vendored in `site/vendor/npm/`
+  (packed from the v0.10.0 CI `wasm-package` artifact; switch to the npm registry once
+  0.10.0 is published there).
 
 ## Check the Modelica port
 

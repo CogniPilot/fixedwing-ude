@@ -87,13 +87,28 @@ model SportCubCommanded "Pilot sticks in, aircraft motion out"
   // [UDE-3] command filter (neural memory only)
   parameter Real tau_z = 0.1307 "Command-filter time constant [s]";
 
-  // Initial state (measured state at the forecast start)
-  parameter Real pN0 = 0, pE0 = 0, pD0 = 0;
-  parameter Real u0 = 4.5, v0 = 0, w0 = 0;
-  parameter Real phi0 = 0, theta0 = 0, psi0 = 0;
-  parameter Real p0 = 0, q0 = 0, r0 = 0;
-  parameter Real da0 = 0, de0 = 0, dr0 = 0, Omega0 = 0.5;
-  parameter Real za0 = 0, ze0 = 0, zt0 = 0.5, zr0 = 0;
+  // Initial state (measured state at the forecast start); one per line so the
+  // site can rewrite them in place.
+  parameter Real pN0 = 0;
+  parameter Real pE0 = 0;
+  parameter Real pD0 = 0;
+  parameter Real u0 = 4.5;
+  parameter Real v0 = 0;
+  parameter Real w0 = 0;
+  parameter Real phi0 = 0;
+  parameter Real theta0 = 0;
+  parameter Real psi0 = 0;
+  parameter Real p0 = 0;
+  parameter Real q0 = 0;
+  parameter Real r0 = 0;
+  parameter Real da0 = 0;
+  parameter Real de0 = 0;
+  parameter Real dr0 = 0;
+  parameter Real Omega0 = 0.5;
+  parameter Real za0 = 0;
+  parameter Real ze0 = 0;
+  parameter Real zt0 = 0.5;
+  parameter Real zr0 = 0;
 
   // Inputs, held over each 1/60 s interval
   input Real u_a "Delayed roll stick";
