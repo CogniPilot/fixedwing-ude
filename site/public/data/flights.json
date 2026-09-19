@@ -1,0 +1,1069 @@
+{
+ "rate_hz": 60.0,
+ "columns": [
+  "pN",
+  "pE",
+  "pD",
+  "u",
+  "v",
+  "w",
+  "phi",
+  "theta",
+  "psi",
+  "p",
+  "q",
+  "r",
+  "u_roll",
+  "u_pitch",
+  "u_throttle",
+  "u_yaw",
+  "good",
+  "safe"
+ ],
+ "history_samples": 64,
+ "frames": "position NED [m]; body velocity FRD [m/s]; ZYX Euler [rad]; body rates [rad/s]",
+ "flights": [
+  {
+   "name": "flight06_SC6_throttle_elevator_mixed",
+   "airframe": "SC6",
+   "session": "nominal_2026-08-03",
+   "purpose": "throttle+elevator excitation, manual/SAFE",
+   "aircraft": "SC6",
+   "samples": 17532,
+   "file": "flights/flight06_SC6_throttle_elevator_mixed.f32",
+   "arcs": [
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 574,
+     "stop": 869
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 1114,
+     "stop": 1236
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 1505,
+     "stop": 1716
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 2309,
+     "stop": 2501
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 2875,
+     "stop": 3101
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 3354,
+     "stop": 3543
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 3813,
+     "stop": 3963
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 4200,
+     "stop": 4373
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 4557,
+     "stop": 4794
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 4988,
+     "stop": 5262
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 5490,
+     "stop": 5651
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 5887,
+     "stop": 6128
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 6441,
+     "stop": 6612
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 6841,
+     "stop": 7077
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 7415,
+     "stop": 8044
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 8074,
+     "stop": 8314
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 8905,
+     "stop": 9066
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 9399,
+     "stop": 9512
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 9764,
+     "stop": 10041
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 10375,
+     "stop": 10741
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 11489,
+     "stop": 11643
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 11876,
+     "stop": 12125
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 12336,
+     "stop": 12481
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 12768,
+     "stop": 12954
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 13728,
+     "stop": 13875
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 14638,
+     "stop": 14837
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 15718,
+     "stop": 15855
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 16275,
+     "stop": 16443
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 16816,
+     "stop": 17153
+    }
+   ]
+  },
+  {
+   "name": "flight07_SC6_aileron_mixed",
+   "airframe": "SC6",
+   "session": "nominal_2026-08-03",
+   "purpose": "aileron excitation, manual/SAFE",
+   "aircraft": "SC6",
+   "samples": 24290,
+   "file": "flights/flight07_SC6_aileron_mixed.f32",
+   "arcs": [
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 111,
+     "stop": 730
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 849,
+     "stop": 1336
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 1633,
+     "stop": 2276
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 2306,
+     "stop": 2552
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 2681,
+     "stop": 2930
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 2985,
+     "stop": 3497
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 3720,
+     "stop": 4394
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 4424,
+     "stop": 4683
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 4738,
+     "stop": 5386
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 5416,
+     "stop": 5665
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 5819,
+     "stop": 6589
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 6689,
+     "stop": 7461
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 7687,
+     "stop": 7956
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 8225,
+     "stop": 8392
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 8641,
+     "stop": 8952
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 9123,
+     "stop": 9268
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 9479,
+     "stop": 9677
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 9902,
+     "stop": 10179
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 10600,
+     "stop": 10743
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 11010,
+     "stop": 11198
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 11628,
+     "stop": 11746
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 11860,
+     "stop": 11970
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 12216,
+     "stop": 12422
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 13003,
+     "stop": 13180
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 13439,
+     "stop": 13640
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 13929,
+     "stop": 14055
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 14348,
+     "stop": 14563
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 15016,
+     "stop": 15228
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 15561,
+     "stop": 15717
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 16059,
+     "stop": 16226
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 16495,
+     "stop": 16867
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 17094,
+     "stop": 17800
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 17830,
+     "stop": 18103
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 18313,
+     "stop": 19051
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 19091,
+     "stop": 19684
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 19714,
+     "stop": 19939
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 20112,
+     "stop": 20713
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 20890,
+     "stop": 21624
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 21707,
+     "stop": 22383
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 22554,
+     "stop": 22670
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 22774,
+     "stop": 23115
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 23287,
+     "stop": 23536
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 23577,
+     "stop": 24138
+    }
+   ]
+  },
+  {
+   "name": "flight08_SC6_rudder_mixed",
+   "airframe": "SC6",
+   "session": "nominal_2026-08-03",
+   "purpose": "rudder excitation, manual/SAFE",
+   "aircraft": "SC6",
+   "samples": 17650,
+   "file": "flights/flight08_SC6_rudder_mixed.f32",
+   "arcs": [
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 0,
+     "stop": 323
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 483,
+     "stop": 1165
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 1228,
+     "stop": 1848
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 1878,
+     "stop": 2115
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 2235,
+     "stop": 2900
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 2930,
+     "stop": 3185
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 3280,
+     "stop": 4111
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 4152,
+     "stop": 4772
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 4802,
+     "stop": 5039
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 5149,
+     "stop": 5728
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 5920,
+     "stop": 6634
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 6772,
+     "stop": 7441
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 7594,
+     "stop": 8192
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 8332,
+     "stop": 9075
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 9258,
+     "stop": 10060
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 10161,
+     "stop": 10814
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 10902,
+     "stop": 11660
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 11690,
+     "stop": 11985
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 12182,
+     "stop": 12477
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 12730,
+     "stop": 12858
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 13171,
+     "stop": 13310
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 14094,
+     "stop": 14299
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 14982,
+     "stop": 15351
+    },
+    {
+     "group": "SC6",
+     "role": "test",
+     "start": 15577,
+     "stop": 15720
+    },
+    {
+     "group": "SC6",
+     "role": "fit",
+     "start": 15930,
+     "stop": 16229
+    },
+    {
+     "group": "SC6",
+     "role": "development",
+     "start": 16836,
+     "stop": 16977
+    }
+   ]
+  },
+  {
+   "name": "flight04_SC7_throttle_SAFE",
+   "airframe": "SC7",
+   "session": "nominal_2026-08-03",
+   "purpose": "throttle excitation, SAFE",
+   "aircraft": "SC7",
+   "samples": 14979,
+   "file": "flights/flight04_SC7_throttle_SAFE.f32",
+   "arcs": [
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 19,
+     "stop": 574
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 620,
+     "stop": 1183
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 1226,
+     "stop": 2433
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 2463,
+     "stop": 2951
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 3127,
+     "stop": 3735
+    },
+    {
+     "group": "SC7",
+     "role": "development",
+     "start": 3931,
+     "stop": 4504
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 4706,
+     "stop": 5282
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 5448,
+     "stop": 6074
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 6223,
+     "stop": 6455
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 6534,
+     "stop": 6895
+    },
+    {
+     "group": "SC7",
+     "role": "development",
+     "start": 7054,
+     "stop": 7751
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 7940,
+     "stop": 8554
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 8724,
+     "stop": 9317
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 9503,
+     "stop": 10234
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 10302,
+     "stop": 10867
+    },
+    {
+     "group": "SC7",
+     "role": "development",
+     "start": 11055,
+     "stop": 11664
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 11838,
+     "stop": 12433
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 12623,
+     "stop": 13130
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 13263,
+     "stop": 14464
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 14494,
+     "stop": 14979
+    }
+   ]
+  },
+  {
+   "name": "flight05_SC7_elevator_SAFE",
+   "airframe": "SC7",
+   "session": "nominal_2026-08-03",
+   "purpose": "elevator excitation, SAFE",
+   "aircraft": "SC7",
+   "samples": 8277,
+   "file": "flights/flight05_SC7_elevator_SAFE.f32",
+   "arcs": [
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 0,
+     "stop": 706
+    },
+    {
+     "group": "SC7",
+     "role": "development",
+     "start": 747,
+     "stop": 1859
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 1889,
+     "stop": 2336
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 2379,
+     "stop": 2846
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 2901,
+     "stop": 3609
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 3683,
+     "stop": 5225
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 5255,
+     "stop": 5886
+    },
+    {
+     "group": "SC7",
+     "role": "fit",
+     "start": 5943,
+     "stop": 6167
+    },
+    {
+     "group": "SC7",
+     "role": "development",
+     "start": 6244,
+     "stop": 6990
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 7020,
+     "stop": 7311
+    },
+    {
+     "group": "SC7",
+     "role": "test",
+     "start": 7515,
+     "stop": 7776
+    }
+   ]
+  },
+  {
+   "name": "flight01_SC9_stall_SAFE",
+   "airframe": "SC9",
+   "session": "stall_2026-08-21",
+   "purpose": "repeated stall onset/recovery, SAFE",
+   "aircraft": "SC9",
+   "samples": 24076,
+   "file": "flights/flight01_SC9_stall_SAFE.f32",
+   "arcs": [
+    {
+     "group": "SC9_stall",
+     "role": "test",
+     "start": 3625,
+     "stop": 3939
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 4374,
+     "stop": 4731
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 5037,
+     "stop": 5766
+    },
+    {
+     "group": "SC9_stall",
+     "role": "development",
+     "start": 5972,
+     "stop": 6583
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 6966,
+     "stop": 7513
+    },
+    {
+     "group": "SC9_stall",
+     "role": "test",
+     "start": 7925,
+     "stop": 8512
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 10001,
+     "stop": 10184
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 13237,
+     "stop": 13358
+    },
+    {
+     "group": "SC9_stall",
+     "role": "development",
+     "start": 14191,
+     "stop": 14363
+    },
+    {
+     "group": "SC9_stall",
+     "role": "test",
+     "start": 16780,
+     "stop": 16949
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 20117,
+     "stop": 20405
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 21186,
+     "stop": 21266
+    },
+    {
+     "group": "SC9_stall",
+     "role": "fit",
+     "start": 22006,
+     "stop": 22085
+    }
+   ]
+  },
+  {
+   "name": "flight02_SC9_nominal_SAFE",
+   "airframe": "SC9",
+   "session": "stall_2026-08-21",
+   "purpose": "nominal manoeuvring, SAFE",
+   "aircraft": "SC9",
+   "samples": 7782,
+   "file": "flights/flight02_SC9_nominal_SAFE.f32",
+   "arcs": [
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 0,
+     "stop": 197
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 350,
+     "stop": 527
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 899,
+     "stop": 1042
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "development",
+     "start": 1367,
+     "stop": 1540
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "test",
+     "start": 1901,
+     "stop": 2251
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 2586,
+     "stop": 2753
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 2842,
+     "stop": 3444
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 3832,
+     "stop": 4277
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "development",
+     "start": 5008,
+     "stop": 5365
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "test",
+     "start": 6017,
+     "stop": 6198
+    }
+   ]
+  },
+  {
+   "name": "flight03_SC9_nominal_SAFE",
+   "airframe": "SC9",
+   "session": "stall_2026-08-21",
+   "purpose": "nominal manoeuvring, SAFE",
+   "aircraft": "SC9",
+   "samples": 4027,
+   "file": "flights/flight03_SC9_nominal_SAFE.f32",
+   "arcs": [
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 0,
+     "stop": 159
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 295,
+     "stop": 420
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 463,
+     "stop": 801
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "development",
+     "start": 1023,
+     "stop": 1224
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "test",
+     "start": 1292,
+     "stop": 1645
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 1882,
+     "stop": 2155
+    },
+    {
+     "group": "SC9_nominal",
+     "role": "fit",
+     "start": 3755,
+     "stop": 3971
+    }
+   ]
+  }
+ ]
+}
