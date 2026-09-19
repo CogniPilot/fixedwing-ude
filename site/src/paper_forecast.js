@@ -1,5 +1,5 @@
 // The per-interval (1/60 s) discrete half of the ACC 2027 models, in plain JS.
-// The continuous half is modelica/SportCubCommanded.mo, run by Rumoca.
+// The continuous half is public/modelica/SportCubCommanded.mo, run by Rumoca.
 //
 // Mirrors ACC_2027 src/acc2027/fixed_wing_model.py (`rollout_states`): every
 // interval the delayed sticks, the separation state s_eff and the bounded neural

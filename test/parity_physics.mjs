@@ -30,7 +30,7 @@ const pkg = process.env.RUMOCA_PKG || path.join(root, "site/node_modules/@cognip
 const { default: init, WasmSimulationSession } = await import(path.join(pkg, "rumoca_bind_wasm.js"));
 await init({ module_or_path: await readFile(path.join(pkg, "rumoca_bind_wasm_bg.wasm")) });
 console.log(`rumoca ${JSON.parse(await readFile(path.join(pkg, "package.json"), "utf8")).version}`);
-const source = await readFile(path.join(root, "modelica/SportCubCommanded.mo"), "utf8");
+const source = await readFile(path.join(root, "site/public/modelica/SportCubCommanded.mo"), "utf8");
 const parameters = JSON.parse(await readFile(path.join(root, "site/public/data/paper_models.json"), "utf8"));
 const { cases } = JSON.parse(await readFile(path.join(root, `test/fixtures/${fixture}/parity_${method}.json`), "utf8"));
 

@@ -1,9 +1,12 @@
 {
   "private": true,
   "type": "module",
-  "description": "Static benchmark site dependency pins.",
+  "description": "ACC 2027 companion site dependency pins.",
   "dependencies": {
-    "@cognipilot/rumoca": "file:vendor/npm/cognipilot-rumoca-0.10.0.tgz",
-    "monaco-editor": "0.49.0"
+    "@cognipilot/rumoca": "file:vendor/npm/cognipilot-rumoca-0.10.0.tgz"
+  },
+  "scripts": {
+    "postinstall": "node vendor_rumoca.mjs",
+    "test": "node ../test/parity_forecast.mjs && node ../test/parity_physics.mjs temporal converged && node ../test/parity_physics.mjs oem paper"
   }
 }

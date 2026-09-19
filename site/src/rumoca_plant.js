@@ -1,4 +1,4 @@
-// Runs modelica/SportCubCommanded.mo in a Rumoca simulation session, one 1/60 s
+// Runs public/modelica/SportCubCommanded.mo in a Rumoca simulation session, one 1/60 s
 // interval at a time with held inputs.
 import { applyParameters } from "./paper_model.js";
 import { STATE_NAMES, FILTER_NAMES } from "./paper_forecast.js";

@@ -17,7 +17,7 @@ const read = async (file) => JSON.parse(await readFile(path.join(root, file), "u
 const pkg = process.env.RUMOCA_PKG || path.join(root, "site/node_modules/@cognipilot/rumoca");
 const { default: init, WasmSimulationSession } = await import(path.join(pkg, "rumoca_bind_wasm.js"));
 await init({ module_or_path: await readFile(path.join(pkg, "rumoca_bind_wasm_bg.wasm")) });
-const source = await readFile(path.join(root, "modelica/SportCubCommanded.mo"), "utf8");
+const source = await readFile(path.join(root, "site/public/modelica/SportCubCommanded.mo"), "utf8");
 const models = await read("site/public/data/paper_models.json");
 
 const wrap = (a) => Math.atan2(Math.sin(a), Math.cos(a));

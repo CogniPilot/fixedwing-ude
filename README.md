@@ -7,18 +7,31 @@ The paper's model runs live in the browser, split the same way its code is:
 
 - **Modelica, compiled and integrated by [Rumoca](https://github.com/CogniPilot/rumoca) WASM** —
   the 16-state commanded-aircraft physics plus the command filters:
-  [`modelica/SportCubCommanded.mo`](modelica/SportCubCommanded.mo).
+  [`site/public/modelica/SportCubCommanded.mo`](site/public/modelica/SportCubCommanded.mo).
 - **JavaScript, once per 1/60 s interval** — stick delays, the feature buffer, the
   neural residual ΔC and the separation state `s_eff`, fed to the plant as inputs:
   [`site/src/paper_forecast.js`](site/src/paper_forecast.js) (also the ARX baseline).
 
+## Run the site locally
+
+```bash
+(cd site && npm ci)      # also copies the Rumoca browser files into site/public/vendor/rumoca
+python3 site/serve.py    # http://127.0.0.1:8765/
+```
+
+The page opens on a held-out stall arc with a 5 s forecast from all four methods.
+Nothing is deployed: there is no Pages workflow, and the repository is private.
+
 ## Layout
 
-- `modelica/` — the plant.
-- `tools/export_reference.py` — reads the reproducibility package (`../ACC_2027`)
-  and exports identified parameters and step-by-step reference rollouts.
+- `site/public/modelica/` — the plant.
+- `tools/export_reference.py` — reads the reproducibility package (`../ACC_2027`) and exports
+  `site/public/data/paper_models.json` (parameters, network weights, ARX) and reference rollouts.
+- `tools/export_site_data.py` — exports the eight flights (float32 tables), their
+  fit / development / test arcs and the reference run's result tables.
 - `test/` — parity tests against those rollouts; `test/fixtures/` is generated.
-- `site/` — the static site. `@cognipilot/rumoca` 0.10.0 is vendored in `site/vendor/npm/`
+- `site/` — the static site (`src/app.js` wiring, `scene.js` 3D view, `charts.js`,
+  `forecast_worker.js` running the forecasts off the main thread, `editor.js` Monaco + Rumoca diagnostics). `@cognipilot/rumoca` 0.10.0 is vendored in `site/vendor/npm/`
   (packed from the v0.10.0 CI `wasm-package` artifact; switch to the npm registry once
   0.10.0 is published there).
 
