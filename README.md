@@ -9,8 +9,8 @@ The paper's model runs live in the browser, split the same way its code is:
   the 16-state commanded-aircraft physics plus the command filters:
   [`modelica/SportCubCommanded.mo`](modelica/SportCubCommanded.mo).
 - **JavaScript, once per 1/60 s interval** — stick delays, the feature buffer, the
-  neural residual ΔC and the separation state `s_eff`, fed to the plant as inputs
-  (not written yet).
+  neural residual ΔC and the separation state `s_eff`, fed to the plant as inputs:
+  [`site/src/paper_forecast.js`](site/src/paper_forecast.js) (also the ARX baseline).
 
 ## Layout
 
@@ -22,14 +22,16 @@ The paper's model runs live in the browser, split the same way its code is:
   (packed from the v0.10.0 CI `wasm-package` artifact; switch to the npm registry once
   0.10.0 is published there).
 
-## Check the Modelica port
+## Check the port against the released models
 
 ```bash
 (cd site && npm ci)
-python3 tools/export_reference.py                 # paper discretisation (RK4, 2 substeps)
+python3 tools/export_reference.py                 # site/public/data/paper_models.json + paper fixtures (RK4, 2 substeps)
 python3 tools/export_reference.py --substeps 40   # converged ODE solution
-node test/parity_physics.mjs temporal converged   # equations: agree to < 2e-4
+node test/parity_physics.mjs temporal converged   # Modelica equations, inputs replayed: < 2e-4
 node test/parity_physics.mjs oem paper            # distance to the paper's numbers: < 5e-3
+node test/parity_forecast.mjs                     # JS half exact (1e-16); full closed loop < 2e-4; ARX
+CLOSED_FIXTURE=paper node test/parity_forecast.mjs  # closed loop vs the paper's own forecasts: < 3e-3
 ```
 
 Rumoca integrates adaptively while the paper uses RK4 at 1/120 s, so the port is

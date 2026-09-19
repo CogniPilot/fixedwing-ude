@@ -1,4 +1,4 @@
-// Bridges the exported ACC 2027 parameters (parameters.json) to the Modelica
+// Bridges the exported ACC 2027 parameters (paper_models.json) to the Modelica
 // plant: the released value of every `parameter Real` for one method / airframe.
 
 const DIRECT_MAPPING = ["k_aa", "k_ar", "k_aphi", "k_ap", "k_ra", "k_rr", "k_rphi", "k_rrate",
@@ -6,7 +6,8 @@ const DIRECT_MAPPING = ["k_aa", "k_ar", "k_aphi", "k_ap", "k_ra", "k_rr", "k_rph
 
 export function modelicaParameters(parameters, method, airframe) {
   const entry = parameters.methods[method].airframes[airframe];
-  const values = { ...entry.physical, KTV: entry.KTV, tau_m: entry.tau_motor_s, tau_z: entry.tau_z_s[0] };
+  const values = { ...entry.physical, KTV: entry.KTV, tau_m: entry.tau_motor_s };
+  ["tau_za", "tau_ze", "tau_zt", "tau_zr"].forEach((name, i) => { values[name] = entry.tau_z_s[i]; });
   for (const name of DIRECT_MAPPING) values[name] = entry.mapping[name];
   values.tau_a = Math.exp(entry.mapping.log_tau_a);
   values.tau_e = Math.exp(entry.mapping.log_tau_e);

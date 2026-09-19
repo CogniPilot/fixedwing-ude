@@ -85,7 +85,10 @@ model SportCubCommanded "Pilot sticks in, aircraft motion out"
   parameter Real tau_e = 0.02 "Elevator lag [s]";
   parameter Real tau_r = 0.0562 "Rudder lag [s]";
   // [UDE-3] command filter (neural memory only)
-  parameter Real tau_z = 0.1307 "Command-filter time constant [s]";
+  parameter Real tau_za = 0.1307 "Roll-stick filter time constant [s]";
+  parameter Real tau_ze = 0.1307 "Pitch-stick filter time constant [s]";
+  parameter Real tau_zt = 0.1307 "Throttle filter time constant [s]";
+  parameter Real tau_zr = 0.1307 "Yaw-stick filter time constant [s]";
 
   // Initial state (measured state at the forecast start); one per line so the
   // site can rewrite them in place.
@@ -162,10 +165,10 @@ equation
   der(dr) = (dr_c - dr)/tau_r;
 
   // [UDE-3] command filter
-  der(za) = (u_a - za)/tau_z;
-  der(ze) = (u_e - ze)/tau_z;
-  der(zt) = (u_t - zt)/tau_z;
-  der(zr) = (u_r - zr)/tau_z;
+  der(za) = (u_a - za)/tau_za;
+  der(ze) = (u_e - ze)/tau_ze;
+  der(zt) = (u_t - zt)/tau_zt;
+  der(zr) = (u_r - zr)/tau_zr;
 
   // Air data
   Vt = min(12.0, max(0.5, sqrt(u*u + v*v + w*w + 1e-8)));

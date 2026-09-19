@@ -31,7 +31,7 @@ const { default: init, WasmSimulationSession } = await import(path.join(pkg, "ru
 await init({ module_or_path: await readFile(path.join(pkg, "rumoca_bind_wasm_bg.wasm")) });
 console.log(`rumoca ${JSON.parse(await readFile(path.join(pkg, "package.json"), "utf8")).version}`);
 const source = await readFile(path.join(root, "modelica/SportCubCommanded.mo"), "utf8");
-const parameters = JSON.parse(await readFile(path.join(root, "test/fixtures/parameters.json"), "utf8"));
+const parameters = JSON.parse(await readFile(path.join(root, "site/public/data/paper_models.json"), "utf8"));
 const { cases } = JSON.parse(await readFile(path.join(root, `test/fixtures/${fixture}/parity_${method}.json`), "utf8"));
 
 // The measured start state goes in through the model's `<state>0` parameters, so
@@ -59,11 +59,12 @@ for (const item of cases) {
   };
   // 0.10 requires every input to have a value when the session is created.
   const session = sessionFor(item.airframe, initial, frame(0));
-  const peak = Object.fromEntries(STATES.map((n) => [n, 0]));
+  const peak = Object.fromEntries([...STATES, ...Z].map((n) => [n, 0]));
   for (let k = 0; k < item.coefficient.length; k += 1) {
     if (typeof session.set_inputs === "function") session.set_inputs(JSON.stringify(frame(k)));
     else for (const [name, value] of frame(k)) session.set_input(name, value);
     for (let s = 0; s < SUBSTEPS; s += 1) session.step(DT / SUBSTEPS);
+    Z.forEach((name, i) => { peak[name] = Math.max(peak[name], Math.abs(session.get(name) - item.z[k + 1][i])); });
     STATES.forEach((name, i) => {
       const delta = session.get(name) - item.x[k + 1][i];
       peak[name] = Math.max(peak[name], Math.abs(ANGLES.has(name) ? wrap(delta) : delta));

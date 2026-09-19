@@ -2,13 +2,14 @@
 """Export the released ACC 2027 models for the companion site.
 
 Reads the reproducibility package (``--acc-root``, default ``../ACC_2027``) and
-writes, under ``--out``:
+writes:
 
-* ``parameters.json`` -- every identified number needed to rebuild the models
-  outside torch: constants, stall priors, feature normalisation, and per
-  method / airframe the physical, receiver-map, delay, motor, command-filter and
-  separation parameters.
-* ``paper/parity_<method>.json`` -- step-by-step internals of a few held-out
+* ``--models`` (``site/public/data/paper_models.json``) -- every number needed to
+  rebuild the four methods outside torch: constants, stall priors, feature
+  normalisation, per method / airframe the physical, receiver-map, delay, motor,
+  command-filter and separation parameters, the network weights, and the ARX
+  matrices.
+* ``--out``/``paper/parity_<method>.json`` -- step-by-step internals of a few held-out
   2 s forecasts (delayed sticks, s_eff, dC, the 16-state and z), used as the
   oracle for the Modelica/JS re-implementation. With ``--substeps N`` the same
   forecasts are integrated finely and written to ``converged/`` instead.
@@ -32,6 +33,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--acc-root", type=Path, default=HERE.parents[1] / "ACC_2027")
     parser.add_argument("--out", type=Path, default=HERE.parent / "test" / "fixtures")
+    parser.add_argument("--models", type=Path, default=HERE.parent / "site" / "public" / "data" / "paper_models.json")
     parser.add_argument("--horizon", type=float, default=2.0)
     parser.add_argument("--windows-per-group", type=int, default=2)
     parser.add_argument("--substeps", type=int, default=None,
@@ -59,6 +61,18 @@ def model_parameters(population, params):
             "tau_z_s": model.tau().tolist(),
         }
     return result
+
+
+def network_weights(core):
+    """Weights of the residual network; conv kernels stay [out, in, kernel]."""
+    state = core.state_dict()
+    layers = lambda prefix, indices: [{"weight": state[f"{prefix}.{i}.weight"].tolist(),
+                                       "bias": state[f"{prefix}.{i}.bias"].tolist()} for i in indices]
+    weights = {"mlp": layers("instantaneous", (0, 2, 4))}
+    if "readout.weight" in state:
+        weights["encoder"] = layers("encoder", range(len(core.encoder)))
+        weights["readout"] = {"weight": state["readout.weight"].tolist(), "bias": state["readout.bias"].tolist()}
+    return weights
 
 
 @torch.no_grad()
@@ -89,6 +103,7 @@ def main():
     from acc2027 import params
     from acc2027.data import load_dataset, make_batch, windows
     from acc2027.evaluation import load_population
+    from acc2027.arx import predict as arx_predict
 
     torch.set_num_threads(4)
     args.out.mkdir(parents=True, exist_ok=True)
@@ -108,17 +123,30 @@ def main():
         "aircraft": params.AIRCRAFT,
         "max_deflection_deg": params.MAX_DEFLECTION_DEG,
         "inertia_coefficients": params.inertia_coefficients(),
-        "stall_priors": params.StallPriors().to_dict(),
+        # The released models hold these as float32 buffers; export what they compute with.
+        "stall_priors": dict(zip(params.StallPriors().to_dict(), populations["oem"].models["SC6"].stall_constants.tolist())),
         "deep_incidence_widths": params.DEEP_INCIDENCE_WIDTHS,
         "speed_reference_m_s": params.SPEED_REFERENCE,
         "throttle_center": params.THROTTLE_CENTER,
-        "residual_scale": list(map(float, params.RESIDUAL_SCALE)),
+        "residual_scale": populations["oem"].models["SC6"].res_scale.tolist(),
         "feature_clip": params.FEATURE_CLIP,
         "feature_mean": {m: populations[m].models["SC6"].fm.tolist() for m in methods},
         "feature_std": {m: populations[m].models["SC6"].fs.tolist() for m in methods},
+        "dilations": list(params.UNIFIED_DILATIONS),
+        "leaky_relu_slope": params.LEAKY_RELU_SLOPE,
+        "input_delay_max_s": params.INPUT_DELAY_MAX_S,
+        "output_names": list(params.OUTPUT_NAMES),
+        "output_scale": params.OUTPUT_SCALE.tolist(),
         "methods": {m: model_parameters(populations[m], params) for m in methods},
     }
-    (args.out / "parameters.json").write_text(json.dumps(exported, indent=1))
+    for method in ("instantaneous", "temporal"):
+        exported["methods"][method]["network"] = network_weights(populations[method].core)
+    arx = json.loads((args.acc_root / "reference/arx.json").read_text())
+    exported["arx"] = {"n_lags": arx["n_lags"],
+                       "airframes": {cfg: {k: v[k] for k in ("A", "B", "c")} for cfg, v in arx["configurations"].items()}}
+    if not args.substeps:
+        args.models.parent.mkdir(parents=True, exist_ok=True)
+        args.models.write_text(json.dumps(exported))
 
     for method, population in populations.items():
         cases = []
@@ -133,6 +161,8 @@ def main():
                 x0, command, _, history, command_history = (
                     t.double() for t in make_batch(data, [(name, start)], args.horizon, "cpu"))
                 trace = traced_rollout(population.models[cfg], x0, command, history, command_history)
+                if method == "oem":
+                    trace["arx"] = arx_predict(arx, cfg, data, [(name, start)], args.horizon)[0].tolist()
                 cases.append({"group": group, "airframe": cfg, "segment": name, "start_index": int(start),
                               "command": command[0].tolist(),
                               "command_history": command_history[0].tolist(),
