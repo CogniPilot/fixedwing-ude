@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Data · PURT fixed-wing identification</title>
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Libre+Franklin:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="./index.html"><b>PURT</b><span>Purdue UAS Research and Test Facility</span></a>
+      <nav aria-label="Pages">
+        <a href="./index.html">Home</a>
+        <a href="./results.html">Results</a>
+        <a href="./data.html" aria-current="page">Data</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-heading">
+        <p class="eyebrow">Data</p>
+        <h1>Eight flights, three airframes</h1>
+        <p class="lede">Motion-capture records of a 63&nbsp;g Sport Cub S2 flown in PURT, resampled to 60&nbsp;Hz. Each flight will be released as a NumPy archive and as CSV, with the raw ROS&nbsp;2 bags and the code; the downloads are not open yet.</p>
+        <p class="actions">
+          <button type="button" class="button primary" id="rosbag-button">Raw rosbags</button>
+          <a class="button" id="package-link" href="#" rel="noopener">Code and models</a>
+        </p>
+        <p class="error" id="rosbag-error" role="alert" hidden>Error: the raw rosbags are not available for download yet.</p>
+        <p class="note" id="download-note"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Flights</h2>
+        <div id="flight-table" class="table-host"></div>
+        <p class="error" id="records-error" role="alert" hidden>Error: the flight records are not available for download yet.</p>
+        <p class="note">SAFE is the share of the flight flown with the receiver's attitude stabilisation on; only those samples are used. Tracked is the share with a valid motion-capture reconstruction.</p>
+      </section>
+
+      <section class="panel">
+        <h2>What is in a record</h2>
+        <div class="table-host">
+          <table class="schema">
+            <thead><tr><th scope="col">Array</th><th scope="col">Columns</th><th scope="col" class="left">Meaning</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><code>time_s</code></th><td>1</td><td class="wrap">Seconds from the first sample, at 60&nbsp;Hz</td></tr>
+              <tr><th scope="row"><code>x</code></th><td>13</td><td class="wrap">Position north-east-down, body velocity, attitude quaternion, body rates</td></tr>
+              <tr><th scope="row"><code>euler</code></th><td>3</td><td class="wrap">Roll, pitch, yaw</td></tr>
+              <tr><th scope="row"><code>u_cmd</code></th><td>4</td><td class="wrap">Pilot sticks: throttle, elevator, aileron, rudder</td></tr>
+              <tr><th scope="row"><code>flight_mode</code></th><td>1</td><td class="wrap">0 manual, 1 SAFE</td></tr>
+              <tr><th scope="row"><code>mocap_tracked</code></th><td>1</td><td class="wrap">1 where the motion-capture reconstruction is valid</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Units are metres, m/s, radians and rad/s. The CSV files hold the same columns.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><b>Physics-Structured Surrogate Modeling of Commanded Fixed-Wing UAV Dynamics Using Universal Differential Equations.</b> Divyanshi Bansal, Micah K. Condie, Sabine Brunswicker and James M. Goppert. American Control Conference 2027.</p>
+      <p>Purdue University · <a href="mailto:bansa171@purdue.edu">bansa171@purdue.edu</a> · <a href="mailto:condiem@purdue.edu">condiem@purdue.edu</a> · <a href="mailto:sbrunswi@purdue.edu">sbrunswi@purdue.edu</a> · <a href="mailto:jgoppert@purdue.edu">jgoppert@purdue.edu</a></p>
+    </footer>
+    <script src="./src/release.js" type="module"></script>
+  </body>
+</html>

@@ -1,4 +1,5 @@
-// Loads the exported flights (float32 tables) and result tables.
+// Loads the exported flights (float32 tables), the paper's stored forecasts
+// and the score scales.
 
 const fetchJson = async (url) => {
   const response = await fetch(url);
@@ -6,19 +7,23 @@ const fetchJson = async (url) => {
   return response.json();
 };
 
+const fetchFloat32 = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+  return new Float32Array(await response.arrayBuffer());
+};
+
 export async function loadSiteData(base = "./public/data") {
-  const [manifest, results, models] = await Promise.all([
-    fetchJson(`${base}/flights.json`), fetchJson(`${base}/results.json`), fetchJson(`${base}/paper_models.json`)]);
-  return { base, manifest, results, models, flights: new Map() };
+  const [manifest, results, forecasts] = await Promise.all([
+    fetchJson(`${base}/flights.json`), fetchJson(`${base}/results.json`), fetchJson(`${base}/forecasts.json`)]);
+  return { base, manifest, results, forecasts, flights: new Map(), tables: new Map() };
 }
 
 // A flight is a row-major float32 table; see flights.json `columns`.
 export async function loadFlight(site, name) {
   if (site.flights.has(name)) return site.flights.get(name);
   const entry = site.manifest.flights.find((flight) => flight.name === name);
-  const response = await fetch(`${site.base}/${entry.file}`);
-  if (!response.ok) throw new Error(`${entry.file}: HTTP ${response.status}`);
-  const table = new Float32Array(await response.arrayBuffer());
+  const table = await fetchFloat32(`${site.base}/${entry.file}`);
   const width = site.manifest.columns.length;
   const flight = {
     ...entry,
@@ -35,21 +40,8 @@ export async function loadFlight(site, name) {
   return flight;
 }
 
-// A forecast may start at sample i when the 64-sample prehistory and the whole
-// horizon are valid SAFE data (the paper's eligibility rule, any role).
-export function forecastWindow(flight, start, steps, history) {
-  const first = start - history + 1;
-  if (first < 0 || start + steps >= flight.samples) return null;
-  for (let i = first; i <= start; i += 1) if (!flight.good(i)) return null;
-  let available = 0;
-  while (available < steps && flight.good(start + available + 1)) available += 1;
-  if (available < Math.min(steps, 30)) return null;
-  const range = (a, b, pick) => Array.from({ length: b - a }, (_, k) => pick(a + k));
-  return {
-    steps: available,
-    stateHistory: range(first, start + 1, flight.state),
-    commandHistory: range(first, start + 1, flight.command),
-    command: range(start, start + available + 1, flight.command),
-    measured: range(start, start + available + 1, flight.state),
-  };
+// One file of stored forecasts (row-major float32, forecasts.json `width` columns), cached.
+export async function loadForecastTable(site, file) {
+  if (!site.tables.has(file)) site.tables.set(file, fetchFloat32(`${site.base}/${file}`));
+  return site.tables.get(file);
 }

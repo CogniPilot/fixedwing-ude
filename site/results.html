@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Results · PURT fixed-wing identification</title>
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Libre+Franklin:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="./index.html"><b>PURT</b><span>Purdue UAS Research and Test Facility</span></a>
+      <nav aria-label="Pages">
+        <a href="./index.html">Home</a>
+        <a href="./results.html" aria-current="page">Results</a>
+        <a href="./data.html">Data</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-heading">
+        <p class="eyebrow">Results</p>
+        <h1>Forecasts against the measured flight</h1>
+        <p class="lede">Pick a flight and a horizon, then step through the paper's held-out forecasts. At the start of each window the models were given the measured state and 1.07&nbsp;s of history, then only the recorded pilot sticks.</p>
+      </section>
+
+      <section class="method-cards" aria-label="The four methods">
+        <article><h3><i class="key key-temporal"></i>Temporal UDE</h3><p>6-DOF physics plus a neural residual that sees the last second of flight.</p></article>
+        <article><h3><i class="key key-instantaneous"></i>Instantaneous UDE</h3><p>The same residual, from the current state only.</p></article>
+        <article><h3><i class="key key-arx"></i>ARX</h3><p>A linear data-driven baseline with lagged sticks.</p></article>
+        <article><h3><i class="key key-oem"></i>OEM</h3><p>Classical output-error fit of the physics. No network.</p></article>
+      </section>
+
+      <section id="explorer" class="panel">
+        <div class="explorer-controls">
+          <label>Flight <select id="flight-select"></select></label>
+          <label>Horizon
+            <select id="horizon-select">
+              <option value="0.5">0.5 s</option><option value="1">1 s</option><option value="2" selected>2 s</option>
+              <option value="5">5 s</option><option value="10">10 s (representative)</option><option value="event">Stall arcs</option>
+            </select>
+          </label>
+          <fieldset id="method-toggles" class="toggles"><legend>Methods</legend></fieldset>
+        </div>
+        <div class="stick-hud" aria-label="Recorded pilot sticks">
+          <div><span>Roll</span><span class="bar signed"><i id="stick-roll"></i></span></div>
+          <div><span>Pitch</span><span class="bar signed"><i id="stick-pitch"></i></span></div>
+          <div><span>Throttle</span><span class="bar"><i id="stick-throttle"></i></span></div>
+          <div><span>Yaw</span><span class="bar signed"><i id="stick-yaw"></i></span></div>
+        </div>
+        <div class="timeline">
+          <button type="button" id="play-toggle" aria-label="Play">▶</button>
+          <div class="timeline-track">
+            <canvas id="role-strip" height="18" aria-hidden="true"></canvas>
+            <input id="scrub" type="range" min="0" max="1" step="1" value="0" aria-label="Time in flight">
+          </div>
+          <output id="time-readout">0.0 s</output>
+          <div class="window-nav">
+            <button type="button" id="window-prev" aria-label="Previous stored forecast">◀</button>
+            <button type="button" id="forecast-button" class="primary">Show forecast nearest here</button>
+            <button type="button" id="window-next" aria-label="Next stored forecast">▶</button>
+          </div>
+        </div>
+        <div class="role-legend" aria-label="Timeline colours">
+          <span><i class="role role-fit"></i>fit</span><span><i class="role role-development"></i>development</span>
+          <span><i class="role role-test"></i>held-out test</span><span><i class="role role-none"></i>not used</span>
+          <span id="window-count"></span>
+          <span id="arc-readout"></span>
+        </div>
+        <p id="forecast-status" class="status" role="status" aria-live="polite"></p>
+        <div id="series-legend" class="legend"></div>
+        <div id="series-grid" class="chart-grid"></div>
+        <div id="score-row" class="score-row"></div>
+        <p class="note">The score is the RMS error over roll, pitch, the three body rates and speed, each divided by a fixed scale. Lower is better.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><b>Physics-Structured Surrogate Modeling of Commanded Fixed-Wing UAV Dynamics Using Universal Differential Equations.</b> Divyanshi Bansal, Micah K. Condie, Sabine Brunswicker and James M. Goppert. American Control Conference 2027.</p>
+      <p>Purdue University · <a href="mailto:bansa171@purdue.edu">bansa171@purdue.edu</a> · <a href="mailto:condiem@purdue.edu">condiem@purdue.edu</a> · <a href="mailto:sbrunswi@purdue.edu">sbrunswi@purdue.edu</a> · <a href="mailto:jgoppert@purdue.edu">jgoppert@purdue.edu</a></p>
+    </footer>
+    <script src="./src/app.js" type="module"></script>
+  </body>
+</html>

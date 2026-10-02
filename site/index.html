@@ -3,144 +3,63 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>Commanded Fixed-Wing UDE — paper companion</title>
+    <meta name="color-scheme" content="dark">
+    <title>PURT · Commanded Fixed-Wing UAV Dynamics</title>
     <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Libre+Franklin:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="./src/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min/vs/editor/editor.main.css">
   </head>
   <body>
     <header class="site-header">
-      <p class="eyebrow">ACC 2027 · paper companion · private preview</p>
-      <h1>Physics-Structured Temporal Neural Modeling of Commanded Fixed-Wing UAV Dynamics</h1>
-      <p class="authors">Divyanshi Bansal · James Goppert — Purdue University</p>
-      <p class="lede">
-        A 63&nbsp;g Sport Cub S2 with a stabilising receiver, flown indoors under motion capture into and out of stall,
-        is identified from <b>pilot sticks in → aircraft motion out</b>. Four models are compared on identical data.
-        Everything on this page runs in your browser: the paper's physics is a Modelica model compiled and integrated by
-        <a href="https://github.com/CogniPilot/rumoca">Rumoca</a> (WebAssembly), and the neural residual runs beside it.
-      </p>
-      <nav class="section-nav" aria-label="Sections">
-        <a href="#explorer">Flight explorer</a>
-        <a href="#results">Results</a>
-        <a href="#model">The model</a>
-        <a href="#data">Data</a>
+      <a class="wordmark" href="./index.html"><b>PURT</b><span>Purdue UAS Research and Test Facility</span></a>
+      <nav aria-label="Pages">
+        <a href="./index.html" aria-current="page">Home</a>
+        <a href="./results.html">Results</a>
+        <a href="./data.html">Data</a>
       </nav>
     </header>
 
     <main>
-      <section id="methods" class="method-cards" aria-label="The four methods">
-        <article><h3><i class="key key-temporal"></i>Temporal UDE</h3><p>The physics below plus a bounded neural force/moment residual that also sees the last 1.05&nbsp;s through a causal convolutional encoder.</p></article>
-        <article><h3><i class="key key-instantaneous"></i>Instantaneous UDE</h3><p>The same residual, but a function of the current state and effective controls only.</p></article>
-        <article><h3><i class="key key-arx"></i>ARX</h3><p>A linear data-driven baseline on the nine outputs with 15 lagged stick samples.</p></article>
-        <article><h3><i class="key key-oem"></i>OEM</h3><p>Classical output-error fit of the 6-DOF physics: receiver map, input delays, motor torque, separation blend. No network.</p></article>
+      <section class="hero">
+        <p class="eyebrow">ACC 2027 · paper companion</p>
+        <h1>Physics-Structured Surrogate Modeling of Commanded Fixed-Wing UAV Dynamics Using Universal Differential Equations</h1>
+        <p class="authors">Divyanshi Bansal · Micah K. Condie · Sabine Brunswicker · James M. Goppert<br>Purdue University</p>
+        <div class="video-frame">
+          <!-- 28 s loop of the FPV chase of the Sport Cub in PURT; see the README to cut a different stretch. -->
+          <video id="hero-video" autoplay muted loop playsinline controls preload="metadata" poster="./public/media/purt_flight_poster.jpg">
+            <source src="./public/media/purt_flight.mp4" type="video/mp4">
+          </video>
+        </div>
       </section>
 
-      <section id="explorer" class="panel">
-        <div class="panel-heading">
-          <h2>Flight explorer</h2>
-          <p>Play back a measured flight, then forecast from any moment: the models get the measured state and 1.07&nbsp;s of history at the start, the recorded sticks afterwards, and never see another measurement.</p>
+      <section class="intro">
+        <div>
+          <h2>Purdue UAS Research and Test Facility</h2>
+          <p>PURT is Purdue's indoor flight-test facility, in Hangar 4 at the Purdue University Airport. Its contiguous flight volume is covered by 60 Qualisys motion-capture cameras, 50 on the ceiling beams and 10 on tripods, which track a vehicle's position and attitude to about a millimetre. It is the largest indoor motion-capture system in the world.</p>
+          <p>Every flight in this paper was flown in PURT. A 63&nbsp;g Sport Cub S2 with a stabilising receiver was flown by a pilot into and out of stall while the cameras recorded its pose at 240&nbsp;Hz. From pilot sticks in to aircraft motion out, four models are identified and compared on the same data.</p>
+          <p class="actions"><a class="button primary" href="./results.html">Explore the results</a><a class="button" href="./data.html">Get the data</a></p>
         </div>
-        <div class="explorer-controls">
-          <label>Flight <select id="flight-select"></select></label>
-          <label>Horizon
-            <select id="horizon-select">
-              <option value="0.5">0.5 s</option><option value="1">1 s</option><option value="2" selected>2 s</option>
-              <option value="5">5 s</option><option value="10">10 s</option>
-            </select>
-          </label>
-          <fieldset id="method-toggles" class="toggles"><legend>Methods</legend></fieldset>
-          <label class="camera-label">Camera
-            <select id="camera-select"><option value="chase">Chase</option><option value="observer" selected>Observer</option><option value="top">Top-down</option></select>
-          </label>
-        </div>
-        <div class="explorer-stage">
-          <div id="scene" class="scene" aria-label="3D playback of the measured flight and the forecasts"></div>
-          <div class="stick-hud" aria-label="Recorded pilot sticks">
-            <div><span>Roll</span><span class="bar signed"><i id="stick-roll"></i></span></div>
-            <div><span>Pitch</span><span class="bar signed"><i id="stick-pitch"></i></span></div>
-            <div><span>Throttle</span><span class="bar"><i id="stick-throttle"></i></span></div>
-            <div><span>Yaw</span><span class="bar signed"><i id="stick-yaw"></i></span></div>
-          </div>
-        </div>
-        <div class="timeline">
-          <button type="button" id="play-toggle" aria-label="Play">▶</button>
-          <div class="timeline-track">
-            <canvas id="role-strip" height="18" aria-hidden="true"></canvas>
-            <input id="scrub" type="range" min="0" max="1" step="1" value="0" aria-label="Time in flight">
-          </div>
-          <output id="time-readout">0.0 s</output>
-          <button type="button" id="forecast-button" class="primary">Forecast from here</button>
-        </div>
-        <div class="role-legend" aria-label="Timeline colours">
-          <span><i class="role role-fit"></i>fit</span><span><i class="role role-development"></i>development</span>
-          <span><i class="role role-test"></i>held-out test</span><span><i class="role role-none"></i>not used (manual mode, tracking loss)</span>
-          <span id="arc-readout"></span>
-        </div>
-        <p id="forecast-status" class="status" role="status" aria-live="polite"></p>
-        <p class="note">Coloured paths are the forecasts; the uncoloured path is the measurement. Position and heading are integrated from the predicted states but never scored, so the paths drift apart faster than the states below. ARX predicts no position at all — its path is reconstructed kinematically from its outputs.</p>
-        <div id="series-legend" class="legend"></div>
-        <div id="series-grid" class="chart-grid"></div>
-        <div id="score-row" class="score-row"></div>
-      </section>
-
-      <section id="results" class="panel">
-        <div class="panel-heading">
-          <h2>Results of the reference run</h2>
-          <p>Recursive forecasts on held-out windows. The score is the RMS error over φ, θ, p, q, r, V, each divided by a fixed scale (20°, 12°, 35°/s, 35°/s, 35°/s, 1&nbsp;m/s); lower is better.</p>
-        </div>
-        <div class="results-layout">
-          <figure>
-            <div id="horizon-legend" class="legend"></div>
-            <div id="horizon-chart" class="chart-host"></div>
-            <figcaption>ARX wins the shortest horizon in attached flow; the temporal UDE wins every longer one.</figcaption>
-          </figure>
-          <div id="pooled-table" class="table-host"></div>
-        </div>
-        <h3>By flight regime</h3>
-        <p class="note">Every scored sample is labelled by the <em>measured</em> wing incidence relative to the stall prior: attached &lt; 8.7°, transition 8.7–14.3°, separated ≥ 14.3°. RMSE in physical units.</p>
-        <div class="explorer-controls"><label>Horizon <select id="regime-horizon"></select></label></div>
-        <div id="regime-table" class="table-host"></div>
-        <h3>Held-out stall arcs</h3>
-        <div id="event-table" class="table-host"></div>
-      </section>
-
-      <section id="model" class="panel">
-        <div class="panel-heading">
-          <h2>The model, editable</h2>
-          <p>This is the physics every forecast above integrates — the OEM, and the backbone of both UDEs. Pick whose identified parameters to load, edit anything, and forecast again. The network's residual ΔC and the separation state <code>s_eff</code> arrive as inputs each 1/60&nbsp;s.</p>
-        </div>
-        <div class="editor-toolbar">
-          <label>Parameters from <select id="parameter-method"><option value="temporal">Temporal UDE</option><option value="instantaneous">Instantaneous UDE</option><option value="oem">OEM</option></select></label>
-          <label class="check"><input type="checkbox" id="use-edited"> Forecast with my edited source</label>
-          <button type="button" id="editor-reset">Reset source</button>
-          <span id="editor-status" class="status"></span>
-        </div>
-        <div id="editor" class="editor" aria-label="Modelica source of the commanded aircraft"></div>
-        <div id="diagnostics" class="diagnostics" hidden></div>
-      </section>
-
-      <section id="data" class="panel">
-        <div class="panel-heading">
-          <h2>Data</h2>
-          <p>Eight motion-capture records on a 60&nbsp;Hz grid from three airframes of the same type (SC6, SC7, SC9). Whole manoeuvre arcs are assigned to fit, development or test; forecasts never straddle a role boundary.</p>
-        </div>
-        <div id="flight-table" class="table-host"></div>
+        <dl class="facts">
+          <div><dt>20,000 ft²</dt><dd>indoor flight floor</dd></div>
+          <div><dt>100 × 180 ft</dt><dd>contiguous volume</dd></div>
+          <div><dt>60</dt><dd>Qualisys cameras</dd></div>
+          <div><dt>1 mm</dt><dd>tracking precision</dd></div>
+        </dl>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Live forecasts are re-simulated in the browser and differ from the paper's stored forecasts by less than 3×10⁻³ (rad, rad/s, m/s): Rumoca integrates adaptively, the paper with RK4 at 1/120&nbsp;s. Tables show the reference run.</p>
+      <p><b>Physics-Structured Surrogate Modeling of Commanded Fixed-Wing UAV Dynamics Using Universal Differential Equations.</b> Divyanshi Bansal, Micah K. Condie, Sabine Brunswicker and James M. Goppert. American Control Conference 2027.</p>
+      <p>Purdue University · <a href="mailto:bansa171@purdue.edu">bansa171@purdue.edu</a> · <a href="mailto:condiem@purdue.edu">condiem@purdue.edu</a> · <a href="mailto:sbrunswi@purdue.edu">sbrunswi@purdue.edu</a> · <a href="mailto:jgoppert@purdue.edu">jgoppert@purdue.edu</a></p>
     </footer>
-
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
-        }
-      }
+    <script>
+      // Until the video file is added, show the poster image without broken controls.
+      const video = document.getElementById("hero-video");
+      const posterOnly = () => video.removeAttribute("controls");
+      video.querySelector("source").addEventListener("error", posterOnly);
+      if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) posterOnly();
     </script>
-    <script src="./src/app.js" type="module"></script>
   </body>
 </html>

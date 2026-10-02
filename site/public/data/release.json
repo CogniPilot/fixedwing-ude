@@ -1,0 +1,365 @@
+{
+ "generated": "2026-10-02",
+ "package": {
+  "repo": "https://github.com/dbansal02/ACC_2027",
+  "commit": "aae5a468d338bb0c8f3ffd4683683341ece47b95",
+  "site_repo": "https://github.com/micahkc/fixedwing-ude"
+ },
+ "rosbags": {
+  "url": null,
+  "megabytes": 609,
+  "count": 8
+ },
+ "records": {
+  "manifests": [
+   {
+    "path": "release/records/nominal_2026-08-03/manifest.json",
+    "bytes": 3907,
+    "sha256": "7df3d5e3e5c2066c128d08623c7ceb4ec19ebf51dd1f7ded7f79e7352686595b",
+    "session": "nominal_2026-08-03"
+   },
+   {
+    "path": "release/records/stall_2026-08-21/manifest.json",
+    "bytes": 2589,
+    "sha256": "4bf29790ebdf3fcb5b74123d1a6a86a9a3bdb0c54252ead8ea0fe2fc8825b36a",
+    "session": "stall_2026-08-21"
+   }
+  ],
+  "csv_columns": [
+   "time_s",
+   "frame",
+   "x_n",
+   "y_e",
+   "z_d",
+   "u",
+   "v",
+   "w",
+   "q_w",
+   "q_x",
+   "q_y",
+   "q_z",
+   "p",
+   "q",
+   "r",
+   "phi",
+   "theta",
+   "psi",
+   "throttle",
+   "elevator",
+   "aileron",
+   "rudder",
+   "throttle_hold",
+   "elevator_hold",
+   "aileron_hold",
+   "rudder_hold",
+   "flight_mode",
+   "mode_changes_in_interval",
+   "mocap_tracked"
+  ],
+  "total_npz_bytes": 26832004,
+  "total_csv_bytes": 29090114
+ },
+ "flights": [
+  {
+   "name": "flight06_SC6_throttle_elevator_mixed",
+   "airframe": "SC6",
+   "session": "nominal_2026-08-03",
+   "purpose": "throttle+elevator excitation, manual/SAFE",
+   "date": "2026-08-03",
+   "start_local": "16:02",
+   "samples": 17532,
+   "duration_s": 292.2,
+   "safe_fraction": 0.6387177732146931,
+   "valid_fraction": 0.9147273556924481,
+   "dropped_frames": 5346,
+   "raw_messages": 64794,
+   "position_residual_mm": 0.09053372412396055,
+   "rotation_residual_deg": 0.11291666781856527,
+   "bag": {
+    "file": "rosbag2_2026_08_03-16_03_02_0.mcap",
+    "folder": "nominal_2026-08-03/flight06_SC6_throttle_elevator_mixed",
+    "campaign_folder": "August 3/6_thottle_elev_open_loops",
+    "sha256": "e1f2bd7a0ebfada49f2e923451c79e34e739db8988949e7c50eb1dcbb2986cd2"
+   },
+   "npz": {
+    "path": "release/records/nominal_2026-08-03/flight06_SC6_throttle_elevator_mixed.npz",
+    "bytes": 4275891,
+    "sha256": "f6524b728b46468e83fcca87159a07fce296e377503a57b178b132927c9cdcd1"
+   },
+   "diagnostics": {
+    "path": "release/records/nominal_2026-08-03/flight06_SC6_throttle_elevator_mixed.diagnostics.json",
+    "bytes": 1831,
+    "sha256": "3889db085a44f64f6e903e58e45d41dafcfa7b9bfc394b627e68ed0e61e4afdc"
+   },
+   "csv": {
+    "path": "release/csv/flight06_SC6_throttle_elevator_mixed.csv",
+    "bytes": 4477112,
+    "sha256": "fef7835b58b6a062e3cc8b7781d1a98d3ac559229bb43a1add4c62b6e078d5f0"
+   }
+  },
+  {
+   "name": "flight07_SC6_aileron_mixed",
+   "airframe": "SC6",
+   "session": "nominal_2026-08-03",
+   "purpose": "aileron excitation, manual/SAFE",
+   "date": "2026-08-03",
+   "start_local": "16:08",
+   "samples": 24290,
+   "duration_s": 404.8333333333333,
+   "safe_fraction": 0.8347879785920131,
+   "valid_fraction": 0.9276657060518732,
+   "dropped_frames": 6390,
+   "raw_messages": 90773,
+   "position_residual_mm": 0.08659343745440634,
+   "rotation_residual_deg": 0.1050331440027491,
+   "bag": {
+    "file": "rosbag2_2026_08_03-16_09_32_0.mcap",
+    "folder": "nominal_2026-08-03/flight07_SC6_aileron_mixed",
+    "campaign_folder": "August 3/7_open_closed_aileron",
+    "sha256": "599c3af8f15df997e7d670bb3ab9cf3ad0fac25ae1514be47f59099819107405"
+   },
+   "npz": {
+    "path": "release/records/nominal_2026-08-03/flight07_SC6_aileron_mixed.npz",
+    "bytes": 5946359,
+    "sha256": "e5c065b601aa0bc2ead58f0a2b5ad074d580d0c2f147476120523b121c1503df"
+   },
+   "diagnostics": {
+    "path": "release/records/nominal_2026-08-03/flight07_SC6_aileron_mixed.diagnostics.json",
+    "bytes": 1799,
+    "sha256": "8a5ab5d512ba0852e5353791b9e3c8ac9e12d553638420498fab4cda5dacb03b"
+   },
+   "csv": {
+    "path": "release/csv/flight07_SC6_aileron_mixed.csv",
+    "bytes": 6285958,
+    "sha256": "f75313bc11281b5d02d1ea1e32f22fa7edcb33e87adc3d43f3e627a623ce43c2"
+   }
+  },
+  {
+   "name": "flight08_SC6_rudder_mixed",
+   "airframe": "SC6",
+   "session": "nominal_2026-08-03",
+   "purpose": "rudder excitation, manual/SAFE",
+   "date": "2026-08-03",
+   "start_local": "16:16",
+   "samples": 17650,
+   "duration_s": 294.1666666666667,
+   "safe_fraction": 0.8658356940509915,
+   "valid_fraction": 0.9260056657223796,
+   "dropped_frames": 4696,
+   "raw_messages": 66366,
+   "position_residual_mm": 0.08171551961481856,
+   "rotation_residual_deg": 0.09741479618362692,
+   "bag": {
+    "file": "rosbag2_2026_08_03-16_17_19_0.mcap",
+    "folder": "nominal_2026-08-03/flight08_SC6_rudder_mixed",
+    "campaign_folder": "August 3/8_rudder_open_closed",
+    "sha256": "55834582dd916d1ac70fd45853e7f572a2569261813db5d17a94890c5278e597"
+   },
+   "npz": {
+    "path": "release/records/nominal_2026-08-03/flight08_SC6_rudder_mixed.npz",
+    "bytes": 4314722,
+    "sha256": "378696eb042d2375c45f73ba65523232e8f50d64e0078da87d9c6dcf32906cd8"
+   },
+   "diagnostics": {
+    "path": "release/records/nominal_2026-08-03/flight08_SC6_rudder_mixed.diagnostics.json",
+    "bytes": 1792,
+    "sha256": "7324f543e16f503e6da39af0aecdfe30d7a50a59977e6bd7089a83d9fcc41131"
+   },
+   "csv": {
+    "path": "release/csv/flight08_SC6_rudder_mixed.csv",
+    "bytes": 4495517,
+    "sha256": "9761713af4e483b5cab3fad09307f8d1f3f12994ab9deab9fa6b4412580db8ea"
+   }
+  },
+  {
+   "name": "flight04_SC7_throttle_SAFE",
+   "airframe": "SC7",
+   "session": "nominal_2026-08-03",
+   "purpose": "throttle excitation, SAFE",
+   "date": "2026-08-03",
+   "start_local": "15:38",
+   "samples": 14979,
+   "duration_s": 249.65,
+   "safe_fraction": 1.0,
+   "valid_fraction": 0.926029775018359,
+   "dropped_frames": 3888,
+   "raw_messages": 56033,
+   "position_residual_mm": 0.08330877438233993,
+   "rotation_residual_deg": 0.10397764670074668,
+   "bag": {
+    "file": "rosbag2_2026_08_03-15_38_56_0.mcap",
+    "folder": "nominal_2026-08-03/flight04_SC7_throttle_SAFE",
+    "campaign_folder": "August 3/4_throttle_closedloop",
+    "sha256": "1485d921f4ca3fc500e817b95f815e5a84d5caea3d6f00d1bef6d253dba1fca7"
+   },
+   "npz": {
+    "path": "release/records/nominal_2026-08-03/flight04_SC7_throttle_SAFE.npz",
+    "bytes": 3637724,
+    "sha256": "2d44350471044d7ab9866640bb9c67145e4f8bdb035fb20885388c73dc27bb51"
+   },
+   "diagnostics": {
+    "path": "release/records/nominal_2026-08-03/flight04_SC7_throttle_SAFE.diagnostics.json",
+    "bytes": 1773,
+    "sha256": "bc1a46dce3ec7ebe1e50e7ce87ba4aa8805e9267d4eac310ed1a503787aade07"
+   },
+   "csv": {
+    "path": "release/csv/flight04_SC7_throttle_SAFE.csv",
+    "bytes": 3729284,
+    "sha256": "298d9dd051efdd2dfd7a4e19522b18e5be709cbeb7c8415b23d432edc396c890"
+   }
+  },
+  {
+   "name": "flight05_SC7_elevator_SAFE",
+   "airframe": "SC7",
+   "session": "nominal_2026-08-03",
+   "purpose": "elevator excitation, SAFE",
+   "date": "2026-08-03",
+   "start_local": "15:44",
+   "samples": 8277,
+   "duration_s": 137.95,
+   "safe_fraction": 0.9424912407877251,
+   "valid_fraction": 0.9801860577503927,
+   "dropped_frames": 603,
+   "raw_messages": 32532,
+   "position_residual_mm": 0.09334596875349092,
+   "rotation_residual_deg": 0.11840604104371667,
+   "bag": {
+    "file": "rosbag2_2026_08_03-15_45_13_0.mcap",
+    "folder": "nominal_2026-08-03/flight05_SC7_elevator_SAFE",
+    "campaign_folder": "August 3/5_elevator_closedloop",
+    "sha256": "890ff00bdffed9bbfa46cea0380341a74bba845d9f4a4ee1b6473567f95a5c40"
+   },
+   "npz": {
+    "path": "release/records/nominal_2026-08-03/flight05_SC7_elevator_SAFE.npz",
+    "bytes": 2123752,
+    "sha256": "ac4b2ec46b0ba36bdc923b03ab6c73f6d69c0d163e4af89948375bf8e47b1fcc"
+   },
+   "diagnostics": {
+    "path": "release/records/nominal_2026-08-03/flight05_SC7_elevator_SAFE.diagnostics.json",
+    "bytes": 1784,
+    "sha256": "61330c0dc8e85e3535f9524e6b4a00b6ad4b5825a282238e08661c390b37a084"
+   },
+   "csv": {
+    "path": "release/csv/flight05_SC7_elevator_SAFE.csv",
+    "bytes": 2097380,
+    "sha256": "1c327996cb6a2af967a79e4c95321e76917f1969b5c5d5a93238019d7b69bef4"
+   }
+  },
+  {
+   "name": "flight01_SC9_stall_SAFE",
+   "airframe": "SC9",
+   "session": "stall_2026-08-21",
+   "purpose": "repeated stall onset/recovery, SAFE",
+   "date": "2026-08-21",
+   "start_local": "15:13",
+   "samples": 24076,
+   "duration_s": 401.26666666666665,
+   "safe_fraction": 1.0,
+   "valid_fraction": 0.649401894002326,
+   "dropped_frames": 33296,
+   "raw_messages": 63011,
+   "position_residual_mm": 0.09054466819405527,
+   "rotation_residual_deg": 0.10027374845177212,
+   "bag": {
+    "file": "rosbag2_2026_08_21-18_13_06_0.mcap",
+    "folder": "stall_2026-08-21/flight01_SC9_stall_SAFE",
+    "campaign_folder": "cub_data_Aug21/stall_SAFEon",
+    "sha256": "73e813b232aef075543e1c5734fd41a5b1742a93685f61fa6a7100c57e21d699"
+   },
+   "npz": {
+    "path": "release/records/stall_2026-08-21/flight01_SC9_stall_SAFE.npz",
+    "bytes": 4112856,
+    "sha256": "957cc9ccdcd0f027d822ba49e6c2bc2ec1be0a4670900094ad6d0b78d3733218"
+   },
+   "diagnostics": {
+    "path": "release/records/stall_2026-08-21/flight01_SC9_stall_SAFE.diagnostics.json",
+    "bytes": 1775,
+    "sha256": "0042316bcde6e60bba791092364cea9c1de6dd0140e96f7a0fef27ca8b7ae1e5"
+   },
+   "csv": {
+    "path": "release/csv/flight01_SC9_stall_SAFE.csv",
+    "bytes": 5272824,
+    "sha256": "89f74013ec5ca87577fed47171cc81eb83550f5b45d6c7b9670fcb44ab2bdce4"
+   }
+  },
+  {
+   "name": "flight02_SC9_nominal_SAFE",
+   "airframe": "SC9",
+   "session": "stall_2026-08-21",
+   "purpose": "nominal manoeuvring, SAFE",
+   "date": "2026-08-21",
+   "start_local": "15:26",
+   "samples": 7782,
+   "duration_s": 129.7,
+   "safe_fraction": 1.0,
+   "valid_fraction": 0.7315600102801336,
+   "dropped_frames": 7883,
+   "raw_messages": 23415,
+   "position_residual_mm": 0.11878155769869335,
+   "rotation_residual_deg": 0.13057761419126182,
+   "bag": {
+    "file": "rosbag2_2026_08_21-18_26_24_0.mcap",
+    "folder": "stall_2026-08-21/flight02_SC9_nominal_SAFE",
+    "campaign_folder": "cub_data_Aug21/rosbag2_2026_08_21-18_26_24",
+    "sha256": "46bc8c46aac5466ecbac27e7c454bef325299b3d6220136ea00969d74c852291"
+   },
+   "npz": {
+    "path": "release/records/stall_2026-08-21/flight02_SC9_nominal_SAFE.npz",
+    "bytes": 1502117,
+    "sha256": "f47a9845cc180cfda0ce226c3ac96689a96579f0e6b2dee0e3c164446029c1d1"
+   },
+   "diagnostics": {
+    "path": "release/records/stall_2026-08-21/flight02_SC9_nominal_SAFE.diagnostics.json",
+    "bytes": 1780,
+    "sha256": "61cdbc15fe8cead15f4f279fbd03f20dcfb7e25371905d9f28177e3d419c05a9"
+   },
+   "csv": {
+    "path": "release/csv/flight02_SC9_nominal_SAFE.csv",
+    "bytes": 1754042,
+    "sha256": "d7d601cb776e9e9838fdaa47d968ef33c216c051f6c75bbfc0c82d85b8ea595d"
+   }
+  },
+  {
+   "name": "flight03_SC9_nominal_SAFE",
+   "airframe": "SC9",
+   "session": "stall_2026-08-21",
+   "purpose": "nominal manoeuvring, SAFE",
+   "date": "2026-08-21",
+   "start_local": "15:33",
+   "samples": 4027,
+   "duration_s": 67.11666666666666,
+   "safe_fraction": 1.0,
+   "valid_fraction": 0.8693816737025081,
+   "dropped_frames": 1947,
+   "raw_messages": 14223,
+   "position_residual_mm": 0.12672069348689838,
+   "rotation_residual_deg": 0.13824662821837963,
+   "bag": {
+    "file": "rosbag2_2026_08_21-18_33_58_0.mcap",
+    "folder": "stall_2026-08-21/flight03_SC9_nominal_SAFE",
+    "campaign_folder": "cub_data_Aug21/rosbag2_2026_08_21-18_33_58",
+    "sha256": "cc5ec1a5c3bfe4f5351b42c7f315628332cd148811d2894432d651acdab3b668"
+   },
+   "npz": {
+    "path": "release/records/stall_2026-08-21/flight03_SC9_nominal_SAFE.npz",
+    "bytes": 918583,
+    "sha256": "c8e2ed37f9fb82fdcd27fa3f468ae162607c5a2566e24f9d4981376f8fc6abc0"
+   },
+   "diagnostics": {
+    "path": "release/records/stall_2026-08-21/flight03_SC9_nominal_SAFE.diagnostics.json",
+    "bytes": 1779,
+    "sha256": "f5eac168953591db469a5cbcbb4bc6093ac472546c0ce48cbb780686294908cc"
+   },
+   "csv": {
+    "path": "release/csv/flight03_SC9_nominal_SAFE.csv",
+    "bytes": 977997,
+    "sha256": "18a814122aa2363d3bc9d7ee75e1364072af903c0681cc5b61a18a0e943d0933"
+   }
+  }
+ ],
+ "photo": {
+  "path": "assets/SportsCub.jpg",
+  "bytes": 252733,
+  "sha256": "5a8ad0d1919ba68d241c59ed6b10be00b098597b8348c48e190fb1d40adc39f2"
+ }
+}
