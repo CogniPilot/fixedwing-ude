@@ -13,7 +13,7 @@ async function init() {
 
   // No rosbag host yet: the button reports that instead of downloading.
   $("rosbag-button").addEventListener("click", () => { $("rosbag-error").hidden = false; });
-  $("package-link").href = release.package.repo;
+  $("package-button").addEventListener("click", () => { $("package-error").hidden = false; });
   $("download-note").textContent = `Rosbags: ${release.rosbags.count} ROS 2 bags in MCAP format, ${release.rosbags.megabytes} MB. Code and models: the reproducibility package on GitHub.`;
 
   const table = document.createElement("table");

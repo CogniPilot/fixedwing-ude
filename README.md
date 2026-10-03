@@ -9,8 +9,8 @@ in Purdue colours and type, served at <https://cognipilot.github.io/fixedwing-ud
 - `site/results.html` — **Results**: pick a flight and a horizon and step through the
   paper's stored held-out forecasts against the measurement, with the score per method.
 - `site/data.html` — **Data**: the eight flights as a table, what a record contains,
-  and a link to the code. The NPZ, CSV and rosbag downloads are not open yet: the
-  buttons report that. `site/public/release/` (the exported records) is ignored by git
+  and the download buttons. None of the NPZ, CSV, rosbag or code downloads are open
+  yet: each button reports that. `site/public/release/` (the exported records) is ignored by git
   until the data is released.
 
 ## Run it
@@ -56,4 +56,5 @@ changes. Nothing is simulated in the browser: every forecast shown is one the pa
 tables and figures were computed from. No data download is open yet. The records exported by `tools/export_release.py` live
 in `site/public/release/`, which git ignores, and the rosbags (609 MB) have no public
 host. To release: remove that line from `.gitignore`, set `ROSBAG_URL` in
-`tools/export_release.py`, and turn the buttons back into links in `site/src/release.js`.
+`tools/export_release.py`, and turn the buttons back into links in `site/src/release.js`
+(the code link is `release.package.repo`).
